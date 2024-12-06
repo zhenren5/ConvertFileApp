@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My app</title>
+</head>
+<body>
+    <h1>File Converter Application</h1>
+    <form id="uploadForm" method="post" action="/convert_csv" enctype="multipart/form-data">
+        <label for="fileInput">Upload Your File:</label>
+        <input type="file" id="fileInput" name="file" accept=".csv,.xlsx,.json">
+        <br><br>
+        <label for="outputFormat">Choose Output Format:</label>
+        <select id="outputFormat" name="format">
+            <option value="csv">CSV</option>
+            <option value="excel">Excel</option>
+            <option value="json">JSON</option>
+        </select>
+        <br><br>
+        <button type="submit">Convert File</button>
+    </form>
+</body>
+</html>
