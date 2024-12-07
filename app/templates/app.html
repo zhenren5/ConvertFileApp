@@ -6,19 +6,55 @@
     <title>My app</title>
 </head>
 <body>
-    <h1>File Converter Application</h1>
-    <form id="uploadForm" method="post" action="/convert_csv" enctype="multipart/form-data">
+    <h1>File Converter Application</h1> <br>
+    
+    
+    <span>Select File Type: </span> 
+
+    <!-- File type selection -->
+    <label>
+        <input type="radio" name="fileType" value="csv" onclick="updateFileType()"> CSV
+    </label>
+    <label>
+        <input type="radio" name="fileType" value="xlsx" onclick="updateFileType()"> Excel (XLSX)
+    </label>
+    <label>
+        <input type="radio" name="fileType" value="json" onclick="updateFileType()"> JSON
+    </label><br><br>
+
+    <form id="uploadForm" method="POST" action="/convert_csv" enctype="multipart/form-data">
         <label for="fileInput">Upload Your File:</label>
-        <input type="file" id="fileInput" name="file" accept=".csv,.xlsx,.json">
+        <input type="file" id="fileInput" name="file" accept="" disabled>
         <br><br>
         <label for="outputFormat">Choose Output Format:</label>
-        <select id="outputFormat" name="format">
+        <select id="outputFormat" name="outputFileType">
             <option value="csv">CSV</option>
             <option value="excel">Excel</option>
             <option value="json">JSON</option>
         </select>
+        <input type="hidden" id="hiddenInputFileType" name="inputeFileType" value="">
         <br><br>
         <button type="submit">Convert File</button>
     </form>
+
+
+    <script>
+        function updateFileType() {
+            const selectedType = document.querySelector('input[name="fileType"]:checked').value;
+            const fileInput = document.getElementById('fileInput');
+            const hiddenInputFileType = document.getElementById('hiddenInputFileType');
+
+            fileInput.disabled=false;
+            if (selectedType === 'csv') {
+                fileInput.accept = '.csv';
+            } else if (selectedType === 'xlsx') {
+                fileInput.accept = '.xlsx';
+            } else if (selectedType === 'json') {
+                fileInput.accept = '.json';
+            }
+            hiddenInputFileType.value=selectedType;
+
+        }
+    </script>
 </body>
 </html>
